@@ -1,30 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'
+import React from 'react'
+import { StyleSheet, Text, View, Slider } from 'react-native'
+import AddEntry from './components/AddEntry'
+import { getMetricMetaInfo } from './utils/helpers';
+import FormSample from './components/FormSample'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+
+const store = createStore(reducer)
 
 export default class App extends React.Component {
-  componentDidMount() {
-    console.log("Before")
 
-    console.log("After")
-  }
   render() {
     return (
-      <View style={styles.container}>
-        <Ionicons name='ios-pizza' color='red' size='100'/>
-        <Text>Open up App.js TOSIA to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={store}>
+        <View style={{flex:1}}> {/*widok na 100% ekranu*/}
+          <AddEntry />
+        </View>
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
