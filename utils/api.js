@@ -1,7 +1,12 @@
 import {AsyncStorage} from 'react-native'
-import {CALENDAR_STORAGE_KEY} from './_calendar' // CALENDAR_STORAGE_KEY = 'UdaciFitness:calendar' 
+import {CALENDAR_STORAGE_KEY, formatCalendarResults} from './_calendar' // CALENDAR_STORAGE_KEY = 'UdaciFitness:calendar' 
 //to "miejsce" w ktorym bedziemy przetrzymywac nasze dane w AsyncStorage
 //to tak naprawde zwykly key w obiekcie AsyncStorage
+
+export function fetchCalendarResults(){
+  return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
+    .then(formatCalendarResults)
+}
 
 export function submitEntry({ entry, key}){
   return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({
