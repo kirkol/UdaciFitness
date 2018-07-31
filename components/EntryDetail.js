@@ -24,6 +24,7 @@ class EntryDetail extends Component {
 
   reset = () => {
     const {remove, goBack, entryId} = this.props
+    console.log("DUPA")
 
     remove()
     goBack()

@@ -10,7 +10,9 @@ import { purple, white } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo' // biblioteka wspierajaca "stale" dla danego systemu (np. padding od gory, itp.)
 import EntryDetail from './components/EntryDetail'
-import DrawerNavigatorSample from './components/DrawerNavigatorSample'
+import Live from './components/Live'
+import {setLocalNotification} from './utils/helpers'
+import PhotosSample from './components/PhotosSample'
 
 const store = createStore(reducer)
 
@@ -34,6 +36,13 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Add Entry',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+    }
+  },
+  Live: {
+    screen: Live,
+    navigationOptions: {
+      tabBarLabel: 'Live',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-speedometer' size={30} color={tintColor} />
     }
   }
 }, { // uwaga, to jest DRUGI argument TabNavigator
@@ -76,12 +85,15 @@ const Tabs = createBottomTabNavigator({
 
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}> {/*widok na 100% ekranu*/}
           <UdaciStatusBar backgroundColor={purple} barStyle='light-content' />
-          <MainNavigator />
+          <App />
         </View>
       </Provider>
     );
